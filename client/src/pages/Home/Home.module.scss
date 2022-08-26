@@ -1,0 +1,21 @@
+.wrapper {
+    display: flex;
+    margin-top: 26px;
+
+    @media screen and (max-width: 576px) {
+        margin-top: 0;
+    }
+}
+
+.container {
+    max-width: 470px;
+    margin-right: 32px;
+
+    @media screen and (max-width: 576px) {
+        margin-right: 0;
+    }
+}
+
+.posts {
+    margin-top: 16px;
+}

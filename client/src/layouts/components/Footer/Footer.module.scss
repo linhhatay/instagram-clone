@@ -1,0 +1,32 @@
+.footer {
+    margin-top: 28px;
+    margin-bottom: 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 768px) {
+        border: none;
+    }
+}
+
+.contact {
+    @media screen and (max-width: 768px) {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+.contact,
+.contact-sub {
+    display: flex;
+    align-items: center;
+
+    div {
+        margin: 0 8px 12px 8px;
+        color: rgb(142, 142, 142);
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
