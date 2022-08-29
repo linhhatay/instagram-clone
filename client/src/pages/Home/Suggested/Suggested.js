@@ -1,4 +1,3 @@
-import axios from 'axios';
 import classNames from 'classnames/bind';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,12 +6,13 @@ import { Link } from 'react-router-dom';
 import Image from '~/components/Image';
 import AccountItem from './AccountItem';
 import styles from './Suggested.module.scss';
+import config from '~/config';
 import { logout } from '~/redux/auth/authActions';
 
 const cx = classNames.bind(styles);
 
 function Suggested() {
-    const { auth } = useSelector((state) => state);
+    const { auth, suggested } = useSelector((state) => state);
     const [suggestions, setSuggestions] = useState([]);
     const dispatch = useDispatch();
 
@@ -23,13 +23,9 @@ function Suggested() {
     };
 
     useEffect(() => {
-        async function getSuggestedAccount() {
-            const res = await axios.get('/api/v1/users');
-            const data = res.data.filter((item) => item._id !== auth.user._id);
-            setSuggestions(data);
-        }
-        getSuggestedAccount();
-    }, []);
+        const data = suggested.data.filter((item) => item._id !== auth.user._id);
+        setSuggestions(data);
+    }, [suggested]);
 
     return (
         <div className={cx('wrapper')}>
@@ -46,7 +42,9 @@ function Suggested() {
             <div className={cx('suggestions')}>
                 <div className={cx('label')}>
                     <h4 className={cx('title')}>Suggestions For You</h4>
-                    <button>See All</button>
+                    <Link to={config.routes.people}>
+                        <button>See All</button>
+                    </Link>
                 </div>
                 {suggestions.slice(0, 5).map((item) => (
                     <AccountItem data={item} key={item._id} />

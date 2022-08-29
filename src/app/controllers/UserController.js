@@ -14,8 +14,20 @@ class UserController {
         try {
             const user = await User.findOne({ username: req.params.username })
                 .select('-password')
-
-                .populate('followers following posts', '-password');
+                .populate('followers following posts', '-password')
+                .populate({
+                    path: 'posts',
+                    populate: {
+                        path: 'author',
+                    },
+                })
+                .populate({
+                    path: 'posts',
+                    populate: {
+                        path: 'comments',
+                        populate: 'author',
+                    },
+                });
             if (!user) return res.status(400).json({ msg: 'User does not exist' });
             res.json({ user });
         } catch (error) {

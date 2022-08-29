@@ -12,13 +12,17 @@ import Tagged from './pages/Profile/Tagged';
 import Notify from './components/Notify';
 import { SOCKET_TYPES } from './redux/socket/socketConstanst';
 import SocketClient from './socketClient';
+import { getPosts } from './redux/post/postActions';
+import { getSuggestedAccount } from './redux/suggested/suggestedActions';
 
 function App() {
     const dispatch = useDispatch();
     const { auth } = useSelector((state) => state);
 
     useEffect(() => {
+        dispatch(getPosts());
         dispatch(refreshToken());
+        dispatch(getSuggestedAccount());
         const socket = io();
         dispatch({ type: SOCKET_TYPES.SOCKET, payload: socket });
         return () => socket.close();

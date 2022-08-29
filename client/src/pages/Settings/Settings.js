@@ -35,7 +35,7 @@ function Settings() {
 
         try {
             const res = await axios.post('https://api.cloudinary.com/v1_1/dvfwekbrc/image/upload', formData);
-            setAvatar(res.data.url);
+            setAvatar(res.data.secure_url);
         } catch (error) {
             console.log('Có lỗi', error);
         }

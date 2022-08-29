@@ -1,0 +1,77 @@
+.preview {
+    width: 390px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid rgba(219, 219, 219);
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.info {
+    margin-left: 8px;
+    padding: 0 8px;
+}
+
+.username {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+}
+
+.fullname {
+    font-size: 14px;
+    line-height: 18px;
+    color: rgb(142, 142, 142);
+}
+
+.analytics {
+    display: flex;
+    border-bottom: 1px solid rgba(219, 219, 219);
+    padding: 16px 0;
+    justify-content: space-around;
+}
+
+.posts-count,
+.followers-count,
+.following-count {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: rgb(142, 142, 142);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+
+    span {
+        color: rgb(38, 38, 38);
+        font-weight: 600;
+    }
+}
+
+.album {
+    display: flex;
+}
+
+.image-preview {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+}
+
+.follow-btn {
+    padding: 16px;
+
+    button {
+        width: 100%;
+        margin-left: 0;
+    }
+}

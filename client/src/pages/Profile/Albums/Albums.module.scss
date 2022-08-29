@@ -17,9 +17,45 @@
         position: absolute;
     }
 
+    &:hover {
+        .overlay {
+            cursor: pointer;
+            display: flex;
+        }
+    }
+
     &::after {
         content: '';
         display: block;
         padding-bottom: 100%;
     }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    display: none;
+}
+
+.icon {
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.likes-count {
+    margin-right: 24px;
+}
+
+.likes-count,
+.comments-count {
+    display: flex;
+    align-items: center;
 }

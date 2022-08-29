@@ -44,7 +44,7 @@ function Modal({ setIsModal, isEdit, data }) {
         try {
             setIsLoading(true);
             const res = await axios.post('https://api.cloudinary.com/v1_1/dvfwekbrc/image/upload', formData);
-            setImage(res.data.url);
+            setImage(res.data.secure_url);
             setIsLoading(false);
         } catch (error) {
             console.log('Có lỗi', error);

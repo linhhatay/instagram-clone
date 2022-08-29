@@ -4,10 +4,9 @@ import { FiBookmark } from 'react-icons/fi';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { MdOutlineChangeCircle } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { ExploreIcon, HeartIcon, HomeIcon, InboxIcon, PostIcon } from '~/components/Icons';
 import Button from '~/components/Button';
 import Image from '~/components/Image';
 import Menu from '~/components/Popper/Menu';
@@ -15,12 +14,15 @@ import Search from '../Search';
 import config from '~/config';
 import Modal from '~/components/Modal';
 import styles from './Header.module.scss';
+import Portal from '~/components/Portal';
+import { ExploreIcon, HeartIcon, HomeIcon, InboxIcon, PostIcon } from '~/components/Icons';
 
 const cx = classNames.bind(styles);
 
 function Header() {
     const [isModal, setIsModal] = useState(false);
     const { auth } = useSelector((state) => state);
+    const [avatar, setAvatar] = useState(auth.user.avatar);
 
     const MENU_ITEMS = [
         {
@@ -31,7 +33,6 @@ function Header() {
         {
             icon: <FiBookmark />,
             title: 'Saved',
-            toast: true,
         },
         {
             icon: <IoSettingsOutline />,
@@ -41,7 +42,6 @@ function Header() {
         {
             icon: <MdOutlineChangeCircle />,
             title: 'Switch account',
-            toast: true,
         },
         {
             title: 'Log Out',
@@ -53,9 +53,17 @@ function Header() {
         setIsModal(true);
     };
 
+    useEffect(() => {
+        setAvatar(auth.user.avatar);
+    }, [auth.user.avatar]);
+
     return (
         <header className={cx('wrapper')}>
-            {isModal && <Modal setIsModal={setIsModal} />}
+            {isModal && (
+                <Portal>
+                    <Modal setIsModal={setIsModal} />
+                </Portal>
+            )}
 
             <div className={cx('inner')}>
                 <Link to={config.routes.home} className={cx('back')}>
@@ -77,7 +85,7 @@ function Header() {
                     <Button className={cx('btn')} leftIcon={<HeartIcon />}></Button>
                     <Menu items={MENU_ITEMS}>
                         <button className={cx('user')}>
-                            <Image className={cx('avatar')} src={auth.user.avatar} />
+                            <Image className={cx('avatar')} src={avatar} />
                         </button>
                     </Menu>
                 </div>

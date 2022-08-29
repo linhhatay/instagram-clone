@@ -8,7 +8,7 @@ import { deleteComment } from '~/redux/comments/commentActions';
 
 const cx = classNames.bind(styles);
 
-function CommentItem({ post, data }) {
+function CommentItem({ post, data, avatar = false }) {
     const dispatch = useDispatch();
     const { socket } = useSelector((state) => state);
 
@@ -19,6 +19,7 @@ function CommentItem({ post, data }) {
     return (
         <div className={cx('comment-item')}>
             <div className={cx('box')}>
+                {avatar && <img className={cx('avatar')} src={data.author.avatar} alt="" />}
                 <span className={cx('author')}>{data.author.username}</span>&nbsp;{' '}
                 <span className={cx('text')}>{data.content}</span>
             </div>

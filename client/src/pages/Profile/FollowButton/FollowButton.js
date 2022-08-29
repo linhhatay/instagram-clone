@@ -8,7 +8,7 @@ import { follow, unfollow } from '~/redux/profile/profileActions';
 
 const cx = classNames.bind(styles);
 
-function FollowButton({ user }) {
+function FollowButton({ user, className }) {
     const [isFollowed, setIsFollowed] = useState(false);
 
     const { auth, profile, socket } = useSelector((state) => state);
@@ -32,14 +32,18 @@ function FollowButton({ user }) {
         return () => setIsFollowed(false);
     }, [auth.user.following, user._id]);
 
+    const classes = cx('btn-follow', {
+        [className]: className,
+    });
+
     return (
         <>
             {isFollowed ? (
-                <Button primary className={cx('btn-follow')} onClick={handleUnFollow}>
+                <Button primary className={classes} onClick={handleUnFollow}>
                     UnFollow
                 </Button>
             ) : (
-                <Button primary className={cx('btn-follow')} onClick={handleFollow}>
+                <Button primary className={classes} onClick={handleFollow}>
                     Follow
                 </Button>
             )}

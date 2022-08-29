@@ -1,20 +1,15 @@
 import classNames from 'classnames/bind';
-import styles from './Home.module.scss';
+import { useSelector } from 'react-redux';
+
 import Post from './Post';
-import Story, { StoryItem } from './Story';
+import styles from './Home.module.scss';
 import Suggested from './Suggested';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getPosts } from '~/redux/post/postActions';
+import Story, { StoryItem } from './Story';
 
 const cx = classNames.bind(styles);
 
 function Home() {
     const { posts } = useSelector((state) => state);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getPosts());
-    }, [dispatch]);
 
     return (
         <div className={cx('wrapper')}>

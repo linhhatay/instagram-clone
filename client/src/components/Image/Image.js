@@ -16,6 +16,7 @@ const Image = forwardRef(({ src, alt, className, fallback: customFallback = imag
             src={fallback || src}
             {...props}
             onError={handleError}
+            alt=""
         />
     );
 });

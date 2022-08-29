@@ -28,7 +28,9 @@ export const updateProfileUser =
             dispatch({ type: AUTH_TYPES.AUTH, payload: { ...auth, user: { ...auth.user, ...data } } });
 
             dispatch({ type: NOTIFY_TYPES.NOTIFY, payload: {} });
-        } catch (error) {}
+        } catch (error) {
+            dispatch({ type: NOTIFY_TYPES.NOTIFY, payload: { isError: true } });
+        }
     };
 
 export const follow =

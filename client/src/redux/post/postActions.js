@@ -57,9 +57,7 @@ export const likePost =
         dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
         socket.emit('likePost', newPost);
         try {
-            // dispatch({ type: NOTIFY_TYPES.NOTIFY, payload: { isLoading: true } });
             await axios.patch(`/api/v1/post/like/${post._id}`, { user: user });
-            // dispatch({ type: NOTIFY_TYPES.NOTIFY, payload: {} });
         } catch (error) {
             dispatch({ type: NOTIFY_TYPES.NOTIFY, payload: { isError: true } });
         }
@@ -73,9 +71,7 @@ export const unlikePost =
         socket.emit('unLikePost', newPost);
 
         try {
-            // dispatch({ type: NOTIFY_TYPES.NOTIFY, payload: { isLoading: true } });
             await axios.patch(`/api/v1/post/unlike/${post._id}`, { user: user });
-            // dispatch({ type: NOTIFY_TYPES.NOTIFY, payload: {} });
         } catch (error) {
             dispatch({ type: NOTIFY_TYPES.NOTIFY, payload: { isError: true } });
         }

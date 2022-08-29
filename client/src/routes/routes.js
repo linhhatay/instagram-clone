@@ -5,6 +5,7 @@ import Profile from '~/pages/Profile';
 import Register from '~/pages/Register';
 import Settings from '~/pages/Settings';
 import Login from '~/pages/Login';
+import People from '~/pages/People';
 
 import config from '~/config';
 
@@ -14,6 +15,7 @@ const privateRoutes = [
     { path: config.routes.explore, component: Explore },
     { path: config.routes.profile, component: Profile },
     { path: config.routes.settings, component: Settings },
+    { path: config.routes.people, component: People },
 ];
 
 const publicRoutes = [

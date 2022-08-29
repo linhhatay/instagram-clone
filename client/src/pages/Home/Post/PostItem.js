@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
-import { FiSmile } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import Tippy from '@tippyjs/react/headless';
 import { useEffect, useState } from 'react';
@@ -12,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deletePost, likePost, unlikePost } from '~/redux/post/postActions';
 import Modal from '~/components/Modal';
 import Comments, { CommentItem } from '~/components/Comments';
-import { createComment } from '~/redux/comments/commentActions';
+import CommentSystem from '~/components/CommentSystem';
 
 const cx = classNames.bind(styles);
 
@@ -22,7 +21,6 @@ function PostItem({ data }) {
     const [isLike, setIsLike] = useState(false);
     const [loadMore, setLoadMore] = useState(4);
     const [isMore, setIsMore] = useState(true);
-    const [comment, setComment] = useState('');
 
     const { auth, socket } = useSelector((state) => state);
 
@@ -49,20 +47,6 @@ function PostItem({ data }) {
             await dispatch(likePost({ post: data, user: auth.user._id, socket }));
             setIsLike(true);
         }
-    };
-
-    const handleComment = (e) => {
-        e.preventDefault();
-        if (!comment.trim()) {
-            return;
-        }
-        const state = {
-            postId: data._id,
-            content: comment,
-            author: auth.user._id,
-        };
-        dispatch(createComment({ post: data, comment: state, auth, socket }));
-        setComment('');
     };
 
     useEffect(() => {
@@ -151,22 +135,7 @@ function PostItem({ data }) {
                     </Comments>
                     <div className={cx('times')}>1 HOURS AGO</div>
                 </div>
-                <div className={cx('comment')}>
-                    <form>
-                        <button className={cx('icons')}>
-                            <FiSmile />
-                        </button>
-                        <textarea
-                            value={comment}
-                            spellCheck={false}
-                            onChange={(e) => setComment(e.target.value)}
-                            placeholder="Add a comment..."
-                        ></textarea>
-                        <button type="submit" className={cx('send')} onClick={handleComment}>
-                            Post
-                        </button>
-                    </form>
-                </div>
+                <CommentSystem data={data} />
             </div>
         </div>
     );

@@ -8,6 +8,7 @@ const routes = {
     tagged: 'tagged',
     home: '/',
     profile: '/:username/*',
+    people: '/people',
 };
 
 export default routes;
